@@ -1,4 +1,4 @@
-package com.matrix.spinnerpreference2;
+package com.github.spinnerpreference2;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 
-import com.matrix.spinnerpreference.SpinnerPreference;
+import com.github.kostasdrakonakis.SpinnerPreference;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
@@ -24,7 +24,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         addPreferencesFromResource(R.xml.prefs);
         setupActionBar();
 
-        SpinnerPreference reels = (SpinnerPreference) findPreference(getString(R.string.key_filter_lines));
+        SpinnerPreference spinner = (SpinnerPreference)
+                findPreference(getString(R.string.key_spinner_preference));
     }
 
     /**

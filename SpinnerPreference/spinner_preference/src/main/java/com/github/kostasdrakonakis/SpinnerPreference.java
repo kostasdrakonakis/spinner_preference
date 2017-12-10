@@ -1,4 +1,4 @@
-package com.matrix.spinnerpreference;
+package com.github.kostasdrakonakis;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,6 +17,8 @@ import java.util.List;
 public class SpinnerPreference extends Preference {
     private List<String> mItems = new ArrayList<>();
     private String mValue;
+
+    private AdapterView.OnItemSelectedListener mListener;
 
     @SuppressWarnings("unused")
     public SpinnerPreference(Context context) {
@@ -52,10 +54,12 @@ public class SpinnerPreference extends Preference {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setValue(mItems.get(position));
+                if (mListener != null) mListener.onItemSelected(parent, view, position, id);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                if (mListener != null) mListener.onNothingSelected(parent);
             }
         });
     }
@@ -74,6 +78,10 @@ public class SpinnerPreference extends Preference {
     public void setItems(List<String> items) {
         mItems = items;
         notifyChanged();
+    }
+
+    public void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener) {
+        mListener = listener;
     }
 
     private void init(Context context, AttributeSet attrs) {

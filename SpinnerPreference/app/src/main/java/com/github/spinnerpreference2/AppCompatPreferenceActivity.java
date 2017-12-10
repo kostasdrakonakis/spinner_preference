@@ -1,4 +1,4 @@
-package com.matrix.spinnerpreference2;
+package com.github.spinnerpreference2;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
