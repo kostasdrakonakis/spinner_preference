@@ -24,8 +24,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         addPreferencesFromResource(R.xml.prefs);
         setupActionBar();
 
-        SpinnerPreference spinner = (SpinnerPreference)
+        SpinnerPreference spinnerPreference = (SpinnerPreference)
                 findPreference(getString(R.string.key_spinner_preference));
+        spinnerPreference.setLayoutBackgroundColor(R.color.colorAccent);
+        spinnerPreference.setTextColor(R.color.colorPrimary);
+        spinnerPreference.setAllCaps(false);
     }
 
     /**

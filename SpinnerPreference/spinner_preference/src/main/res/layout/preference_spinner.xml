@@ -1,32 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/spinner_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/preference_color_white"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingLeft="@dimen/preference_item_padding_horizontal"
-    android:paddingRight="@dimen/preference_item_padding_horizontal">
+    android:paddingEnd="@dimen/preference_item_padding_horizontal"
+    android:paddingStart="@dimen/preference_item_padding_horizontal">
 
     <TextView
         android:id="@+id/spinner_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/spinner_dropdown"
-        android:layout_toLeftOf="@+id/spinner_dropdown"
         android:ellipsize="end"
         android:maxLines="1"
         android:textAppearance="?android:attr/textAppearanceListItem" />
-
-    <Spinner
-        android:id="@id/spinner_dropdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:spinnerMode="dropdown" />
 
 </RelativeLayout>

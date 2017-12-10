@@ -4,5 +4,6 @@
         android:defaultValue="@string/app_name"
         android:key="@string/key_spinner_preference"
         android:title="@string/app_name"
+        app:spinnerMode="dropdown"
         app:spinnerValues="@array/font_options" />
 </PreferenceScreen>
