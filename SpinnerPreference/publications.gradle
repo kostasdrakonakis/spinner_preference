@@ -1,0 +1,73 @@
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+version = project.getProperty("libraryVersion")
+
+if (project.hasProperty("android")) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name project.getProperty("licenseName")
+            url project.getProperty("licenseUrl")
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id project.getProperty("developerId")
+            name project.getProperty("developerName")
+            email project.getProperty("developerEmail")
+        }
+    }
+
+    scm {
+        url project.getProperty("gitUrl")
+    }
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// Create the publication with the pom configuration:
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            artifact sourcesJar
+            artifact javadocJar
+            groupId project.getProperty("publishedGroupId")
+            artifactId project.getProperty("artifact")
+            version project.getProperty("libraryVersion")
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', project.getProperty("libraryDescription"))
+                root.appendNode('name', project.getProperty("libraryName"))
+                root.appendNode('url', project.getProperty("siteUrl"))
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
