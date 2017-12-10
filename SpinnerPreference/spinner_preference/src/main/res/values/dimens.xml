@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spinner_text_padding_horizontal">24dp</dimen>
+    <dimen name="spinner_text_padding_vertical">12dp</dimen>
+    <dimen name="preference_item_padding_horizontal">15dp</dimen>
+</resources>

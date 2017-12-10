@@ -1,0 +1,8 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.matrix.spinnerpreference.SpinnerPreference
+        android:defaultValue="@string/app_name"
+        android:key="@string/key_filter_lines"
+        android:title="@string/app_name"
+        app:spinnerValues="@array/font_options" />
+</PreferenceScreen>

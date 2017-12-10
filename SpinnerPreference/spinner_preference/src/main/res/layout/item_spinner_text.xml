@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:gravity="end"
+    android:maxLines="1"
+    android:paddingBottom="@dimen/spinner_text_padding_vertical"
+    android:paddingLeft="@dimen/spinner_text_padding_horizontal"
+    android:paddingRight="@dimen/spinner_text_padding_horizontal"
+    android:paddingTop="@dimen/spinner_text_padding_vertical"
+    android:textAlignment="textEnd"
+    android:textAppearance="?android:attr/textAppearanceLargePopupMenu" />
