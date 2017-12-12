@@ -1,1 +1,1 @@
-include ':app', ':spinner_preference'
+include ':app', ':spinner-preference'
