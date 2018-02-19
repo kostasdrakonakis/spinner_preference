@@ -20,7 +20,7 @@ Download the latest JAR or grab via Maven:
 ```
 or Gradle:
 ```groovy
-compile 'com.github.kostasdrakonakis:spinner-preference:1.0.0'
+implementation 'com.github.kostasdrakonakis:spinner-preference:1.0.1'
 ```
 
 Usage
