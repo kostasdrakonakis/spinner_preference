@@ -15,12 +15,12 @@ Download the latest JAR or grab via Maven:
 <dependency>
   <groupId>com.github.kostasdrakonakis</groupId>
   <artifactId>spinner-preference</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-implementation 'com.github.kostasdrakonakis:spinner-preference:1.0.1'
+implementation 'com.github.kostasdrakonakis:spinner-preference:1.0.2'
 ```
 
 Usage
@@ -68,7 +68,6 @@ You can specify attributes in prefs.xml directly in the layout:
 
 ```xml
 <com.github.kostasdrakonakis.SpinnerPreference
-        ...
         app:spinnerMode="dropdown"
         app:preferenceVisibility="visible"
         app:preferenceTextColor="@color/colorPrimary"
@@ -99,8 +98,6 @@ SpinnerPreference spinnerPreference = (SpinnerPreference) findPreference(getStri
         
         spinnerPreference.setItems(Arrays.asList(getResources().getStringArray(R.array.font_options)));
 ```
-
-
 
 License
 -------
