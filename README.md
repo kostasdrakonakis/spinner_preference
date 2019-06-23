@@ -1,4 +1,4 @@
-Spinner Preference [![Maven Central](https://img.shields.io/badge/Maven%20Central-spinner--preference-brightgreen.svg)](http://search.maven.org/#search%7Cga%7C1%7Ckostasdrakonakis) [ ![Download](https://api.bintray.com/packages/kdrakonakis/maven/spinner-preference/images/download.svg) ](https://bintray.com/kdrakonakis/maven/spinner-preference/_latestVersion)
+Spinner Preference [![Maven Central](https://img.shields.io/badge/Maven%20Central-spinner--preference-brightgreen.svg)](http://search.maven.org/#search%7Cga%7C1%7Ckostasdrakonakis) [ ![Download](https://api.bintray.com/packages/kdrakonakis/maven/spinner-preference/images/download.svg) ](https://bintray.com/kdrakonakis/maven/spinner-preference/_latestVersion) [![Build Status](https://travis-ci.org/kostasdrakonakis/spinner_preference.svg?branch=master)](https://travis-ci.org/kostasdrakonakis/spinner_preference)
 
 
 A custom Preference that implements Spinner in PreferenceActivity in android.
