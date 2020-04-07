@@ -15,12 +15,12 @@ Download the latest JAR or grab via Maven:
 <dependency>
   <groupId>com.github.kostasdrakonakis</groupId>
   <artifactId>spinner-preference</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-implementation 'com.github.kostasdrakonakis:spinner-preference:1.0.2'
+implementation 'com.github.kostasdrakonakis:spinner-preference:1.0.3'
 ```
 
 Usage
@@ -42,22 +42,88 @@ In the prefs.xml add this:
 
 and then in your PreferenceActivity
 
-```java
-import android.os.Bundle;
+```kotlin
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import com.github.kostasdrakonakis.SpinnerPreference
 
-import com.github.kostasdrakonakis.SpinnerPreference;
+class SettingsActivity : AppCompatActivity(),
+    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
-public class SettingsActivity extends AppCompatPreferenceActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.prefs);
-
-        SpinnerPreference spinnerPreference = (SpinnerPreference)
-                findPreference(getString(R.string.key_spinner_preference));
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.settings_main)
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.settings, SettingsFragment())
+                .commit()
+        } else {
+            title = savedInstanceState.getCharSequence(TITLE_TAG)
+        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
+
+    override fun onPreferenceStartFragment(
+        caller: PreferenceFragmentCompat, pref: Preference): Boolean {
+        val args = pref.extras
+        val fragment = supportFragmentManager.fragmentFactory.instantiate(
+            classLoader,
+            pref.fragment
+        ).apply {
+            arguments = args
+            setTargetFragment(caller, 0)
+        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.settings, fragment)
+            .addToBackStack(null)
+            .commit()
+        title = pref.title
+        return true
+    }
+
+    internal class SettingsFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.prefs, rootKey)
+            val spinnerPreference: SpinnerPreference? = findPreference(getString(R.string.app_name))
+            spinnerPreference?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                }
+
+            })
+            spinnerPreference?.setLayoutBackgroundColor(R.color.colorAccent)
+            spinnerPreference?.setTextColor(R.color.colorPrimary)
+            spinnerPreference?.setAllCaps(false)
+        }
+    }
+
+    companion object {
+        private fun createIntent(context: Context): Intent {
+            return Intent(context, SettingsActivity::class.java)
+        }
+
+        @JvmStatic
+        fun startActivity(activity: Activity) {
+            activity.startActivity(createIntent(activity))
+        }
+
+        const val TITLE_TAG = "settingsActivityTitle"
+    }
 }
 ```
 
@@ -78,25 +144,28 @@ You can specify attributes in prefs.xml directly in the layout:
 
 or programmatically like:
 
-```java
-SpinnerPreference spinnerPreference = (SpinnerPreference) findPreference(getString(R.string.key_spinner_preference));
-        spinnerPreference.setLayoutBackgroundColor(R.color.colorAccent);
-        spinnerPreference.setTextColor(R.color.colorPrimary);
-        spinnerPreference.setAllCaps(false);
-        spinnerPreference.setVisibility(View.VISIBLE);
-        spinnerPreference.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                
-            }
+```kotlin
+class SettingsActivity : AppCompatActivity(),
+    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+    internal class SettingsFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.prefs, rootKey)
+            val spinnerPreference: SpinnerPreference? = findPreference(getString(R.string.app_name))
+            spinnerPreference?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
 
-            }
-        });
-        
-        spinnerPreference.setItems(Arrays.asList(getResources().getStringArray(R.array.font_options)));
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                }
+
+            })
+            spinnerPreference?.setLayoutBackgroundColor(R.color.colorAccent)
+            spinnerPreference?.setTextColor(R.color.colorPrimary)
+            spinnerPreference?.setAllCaps(false)
+        }
+    }
+}
 ```
 
 License
