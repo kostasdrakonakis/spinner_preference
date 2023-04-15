@@ -1,4 +1,4 @@
-Spinner Preference [![Build](https://github.com/kostasdrakonakis/spinner_preference/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/kostasdrakonakis/spinner_preference/actions/workflows/android.yml)
+Spinner Preference [![Maven Central](https://img.shields.io/badge/Maven%20Central-spinner--preference-brightgreen.svg)](http://search.maven.org/#search%7Cga%7C1%7Ckostasdrakonakis) [![Build](https://github.com/kostasdrakonakis/spinner_preference/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/kostasdrakonakis/spinner_preference/actions/workflows/android.yml)
 
 A custom Preference that implements Spinner in PreferenceActivity in android.
 
