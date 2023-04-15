@@ -48,7 +48,9 @@ class SpinnerPreference : Preference {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context, attrs, defStyleAttr
+    ) {
         init(context, attrs)
     }
 
@@ -70,7 +72,9 @@ class SpinnerPreference : Preference {
         val selection = mItems.indexOf(mValue)
         if (selection >= 0) spinner.setSelection(selection)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
                 setValue(mItems[position])
                 mListener?.onItemSelected(parent, view, position, id)
             }
@@ -85,9 +89,9 @@ class SpinnerPreference : Preference {
         return a.getString(index)!!
     }
 
-    override fun onSetInitialValue(restorePersistedValue: Boolean, defaultValue: Any?) {
-        super.onSetInitialValue(restorePersistedValue, defaultValue)
-        setValue(if (restorePersistedValue) getPersistedString("0") else defaultValue as String)
+    override fun onSetInitialValue(defaultValue: Any?) {
+        super.onSetInitialValue(defaultValue)
+        setValue(defaultValue as String)
     }
 
     fun setItems(items: List<String?>) {
@@ -123,7 +127,8 @@ class SpinnerPreference : Preference {
         layoutResource = R.layout.preference_spinner
         val array = context.obtainStyledAttributes(attrs, R.styleable.SpinnerPreference)
         val id = array.getResourceId(R.styleable.SpinnerPreference_spinnerValues, 0)
-        val backgroundColor = array.getColor(R.styleable.SpinnerPreference_preferenceLayoutColor, Color.WHITE)
+        val backgroundColor =
+            array.getColor(R.styleable.SpinnerPreference_preferenceLayoutColor, Color.WHITE)
         val textColor = array.getColor(R.styleable.SpinnerPreference_preferenceTextColor, 0)
         mSpinnerMode = array.getInt(R.styleable.SpinnerPreference_spinnerMode, 1)
         mAllCaps = array.getBoolean(R.styleable.SpinnerPreference_preferenceAllCaps, true)
@@ -145,8 +150,8 @@ class SpinnerPreference : Preference {
     private fun createSpinner(container: RelativeLayout?): Spinner {
         val spinner = Spinner(context, mSpinnerMode)
         val params = RelativeLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
+            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         params.addRule(RelativeLayout.ALIGN_PARENT_END)
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
         params.addRule(RelativeLayout.END_OF, R.id.spinner_title)

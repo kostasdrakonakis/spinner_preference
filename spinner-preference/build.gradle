@@ -1,16 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'org.jetbrains.dokka'
 
 android {
-    compileSdkVersion 29
+    namespace "com.github.kostasdrakonakis"
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 29
+        targetSdkVersion 33
         versionCode 1
-        versionName version
+        versionName "1.0.3"
     }
     buildTypes {
         release {
@@ -21,31 +20,15 @@ android {
     lintOptions {
         abortOnError false
     }
-}
-
-apply from: 'https://raw.githubusercontent.com/kostasdrakonakis/maven-upload/master/bintray.gradle'
-apply from: 'https://raw.githubusercontent.com/kostasdrakonakis/maven-upload/master/publications.gradle'
-
-task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
-    outputFormat = 'javadoc'
-    outputDirectory = "$buildDir/javadoc"
-    inputs.dir 'src/main/java'
-}
-
-javadoc {
-    failOnError false
-}
-
-javadocJar {
-    doLast {
-        archiveClassifier.set("javadoc")
-        from dokka.outputDirectory
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_18
+        targetCompatibility JavaVersion.VERSION_18
     }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.preference:preference:1.1.0'
-    implementation 'androidx.preference:preference-ktx:1.1.0'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
 }

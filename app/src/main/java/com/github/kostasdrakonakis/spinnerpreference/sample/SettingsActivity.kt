@@ -18,9 +18,7 @@ class SettingsActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_main)
         if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.settings, SettingsFragment())
+            supportFragmentManager.beginTransaction().replace(R.id.settings, SettingsFragment())
                 .commit()
         } else {
             title = savedInstanceState.getCharSequence(TITLE_TAG)
@@ -34,19 +32,21 @@ class SettingsActivity : AppCompatActivity(),
     }
 
     override fun onPreferenceStartFragment(
-        caller: PreferenceFragmentCompat, pref: Preference): Boolean {
+        caller: PreferenceFragmentCompat, pref: Preference
+    ): Boolean {
         val args = pref.extras
-        val fragment = supportFragmentManager.fragmentFactory.instantiate(
-            classLoader,
-            pref.fragment
-        ).apply {
-            arguments = args
-            setTargetFragment(caller, 0)
+        val fragment = pref.fragment?.let {
+            supportFragmentManager.fragmentFactory.instantiate(
+                classLoader, it
+            ).apply {
+                arguments = args
+                setTargetFragment(caller, 0)
+            }
         }
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.settings, fragment)
-            .addToBackStack(null)
-            .commit()
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction().replace(R.id.settings, fragment)
+                .addToBackStack(null).commit()
+        }
         title = pref.title
         return true
     }
@@ -55,11 +55,14 @@ class SettingsActivity : AppCompatActivity(),
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.prefs, rootKey)
             val spinnerPreference: SpinnerPreference? = findPreference(getString(R.string.app_name))
-            spinnerPreference?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            spinnerPreference?.setOnItemSelectedListener(object :
+                AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
 
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?, view: View?, position: Int, id: Long
+                ) {
                 }
 
             })
