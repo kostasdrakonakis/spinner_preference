@@ -22,6 +22,9 @@ android {
     lint {
         abortOnError false
     }
+    kotlin {
+        jvmToolchain(21)
+    }
 }
 
 dependencies {
