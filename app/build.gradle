@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 
 android {
     namespace "com.github.kostasdrakonakis.spinnerpreference.sample"
-    compileSdk 36
+    compileSdk 37
     defaultConfig {
         applicationId "com.github.kostasdrakonakis.spinnerpreference.sample"
         minSdkVersion 21
-        targetSdkVersion 36
+        targetSdkVersion 37
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true

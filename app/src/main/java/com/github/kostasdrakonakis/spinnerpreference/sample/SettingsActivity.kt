@@ -31,6 +31,7 @@ class SettingsActivity : AppCompatActivity(),
         return true
     }
 
+    @Suppress("UNUSED_PARAMETER")
     override fun onPreferenceStartFragment(
         caller: PreferenceFragmentCompat, pref: Preference
     ): Boolean {
@@ -40,7 +41,6 @@ class SettingsActivity : AppCompatActivity(),
                 classLoader, it
             ).apply {
                 arguments = args
-                setTargetFragment(caller, 0)
             }
         }
         if (fragment != null) {
